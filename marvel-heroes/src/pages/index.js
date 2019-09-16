@@ -1,21 +1,50 @@
-import React from "react"
+import React, {useEffect, useState} from "react";
+import Hero from '../components/hero';
 import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+
+
+const IndexPage = () => {
+  var CryptoJS = require("crypto-js");
+  var PER_KEY = "1bfa664b1ea019a1ff2389651f0e1b08";
+  var PRIV_KEY = "4fee004b323c73ee3f7f7e01715103772d9d0710";
+  const[heroes, setHeroes] =useState([]);
+
+  useEffect(
+    () => {
+      getHeroes();
+    }, []
+  );
+  
+  const getHeroes =async () =>
+  {
+    var ts = new Date().getTime();
+    var hash = CryptoJS.MD5(ts + PRIV_KEY + PER_KEY).toString();
+    const response = await fetch(`http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${PER_KEY}&hash=${hash}`);
+    const data = await response.json();
+    setHeroes(Array.from(data.data.results));
+    console.log(data.data.results);
+  }
+
+  return (
+    <div className="IndexPage">
+
+      <div className="heroes">
+        {heroes.map(hero =>
+          (
+          <Hero
+            id={hero.id}
+            name={hero.name}
+            descr={hero.descr}
+            thumb={hero.thumbnail.path}
+            comics={hero.comics.items}
+            />
+          ))}
+      </div>
     </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+  );
 
-export default IndexPage
+
+
+};
