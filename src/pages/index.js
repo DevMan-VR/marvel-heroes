@@ -2,10 +2,6 @@ import React, {useState, useEffect} from "react"
 import ReactDOM from "react-dom"
 import Hero from "../components/hero"
 import { Grid } from 'semantic-ui-react'
-import Layout from "../components/layout"
-//import Modal from"../components/Modal"
-
-import {Image, Button, Header, Modal} from "semantic-ui-react"
 
 
 const IndexPage = () => {
@@ -24,6 +20,7 @@ const IndexPage = () => {
   );
 
   const getHeroes = async () => {
+
     var ts = new Date().getTime();
     var hash = CryptoJS.MD5(ts + PRIV_KEY + PER_KEY).toString();
     var url = `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${PER_KEY}&hash=${hash}`;
@@ -36,35 +33,18 @@ const IndexPage = () => {
   
   
   return(
-    <Layout>
-      <h1>SELECT YOUR CHARACTER!!</h1>
     <div className="Index">
       <div className="Hero">
 
           {heroes.map(hero =>
               (
-                
-
-                <Modal trigger={
-                  <Button class="ui button">
-                      <Hero
-                        id={hero.id}
-                        thumbnail={`${hero.thumbnail.path}/standard_amazing.${hero.thumbnail.extension}`}
-                      />
-                  </Button>
-                }>
-                <Modal.Header>hola{hero.name}</Modal.Header>
-                <Modal.Content image >
-                  <Image   src={`${hero.thumbnail.path}/standard_amazing.${hero.thumbnail.extension}`} />
-                  <Modal.Description>
-                    <Header>Hello world</Header>
-                    <p>
-                    Hola mundo!
-                    </p>
-                  </Modal.Description>
-                </Modal.Content>
-                </Modal>
-
+                    <Hero
+                    key={hero.id}
+                    id={hero.id}
+                    name={hero.name}
+                    thumbnail={`${hero.thumbnail.path}/landscape_small.${hero.thumbnail.extension}`}
+                    description={hero.description}
+                    />
 
               )
             )
@@ -73,7 +53,6 @@ const IndexPage = () => {
         
       </div>
     </div>
-    </Layout>
   );
 };
 
