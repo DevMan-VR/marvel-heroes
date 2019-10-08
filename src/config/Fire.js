@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+
+
   // Your web app's Firebase configuration
   const config = {
     apiKey: "AIzaSyDq-B9jT-IQSI0gN_jbJDJFw3V-79gqEpg",
@@ -12,5 +14,36 @@ import firebase from 'firebase';
   };
 
   //iniciando firebase
-  const fire = firebase.initializeApp(config);
-  export default fire;
+  class Firebase {
+    constructor() {
+      firebase.initializeApp(config);
+      this.auth = firebase.auth();
+      this.db = firebase.firestore();
+    }
+
+    login(email, password) {
+      return this.auth.signInWithEmailAndPassword(email,password);
+    }
+
+    logout() {
+      return this.auth.signOut();
+    }
+
+    async register(username, email, password){
+      await this.auth.createUserWithEmailAndPassword(email, password);
+      return this.auth.currentUser.updateProfile({
+        displayName: username
+      })
+    }
+
+    isInitialized() {
+      return new Promise(resolve => {
+        this.auth.onAuthStateChanged(resolve);
+      })
+    }
+    getCurrentUsername(){
+      return this.auth.currentUser && this.auth.currentUser.displayName;
+    }
+
+  }
+  export default new Firebase();

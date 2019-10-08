@@ -1,31 +1,76 @@
-import React from "react";
+import React, {useState} from "react";
 import './login.css';
-import Fire from './config/Fire';
+import firebase from './config/Fire';
+import {withRouter} from 'react-router-dom';
 
-function Signup () {
+function Signup (props) {
+
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    //const [quote, setQuote] = useState('');
+
     return(
-        <div class="wrapper fadeInDown">
+        <div className="wrapper fadeInDown">
             <div id="formContent">
-            
-
-            
-                <div class="fadeIn first">
+                <div className="fadeIn first">
                 </div>
-                <form>
-                <input type="text" id="username" className="fadeIn second" name="username" placeholder="username"/>
-                <input type="text" id="email" class="fadeIn second" name="email" placeholder="email"/>
-                <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
-                <input type="submit" class="fadeIn fourth" value="Sign Up"/>
+                <form onSubmit={e => e.preventDefault & console.log(firebase)}>
+                    <input 
+                        type="text"
+                        id="username" 
+                        className="fadeIn second" 
+                        name="username" 
+                        placeholder="username"
+                        value={username}
+                        onChange={ e => setUsername(e.target.value)}
+                    />
+
+                    <input 
+                        type="text"
+                        id="email" 
+                        className="fadeIn second" 
+                        name="email" 
+                        placeholder="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input 
+                        type="text" 
+                        id="password" 
+                        className="fadeIn third" 
+                        name="login" 
+                        placeholder="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <input 
+                        type="submit" 
+                        className="fadeIn fourth" 
+                        value="Sign Up"
+                    
+                    />
                 </form>
 
                 
                 <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+                <a className="underlineHover" href="#">Forgot Password?</a>
                 </div>
 
             </div>
         </div>
     )
+
+    async function onRegister() {
+        try {
+            await firebase.register(username, email, password);
+            props.history.replace('/herogrid');
+        } catch(error) {
+            alert(error.message)
+        }
+    }
+
+
 }
 
-export default Signup;
+export default withRouter(Signup);

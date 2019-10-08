@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import firebase from '../config/Fire'
 
-const Header = ({userState}) => (
+function Header({userState}) {
+    
+
+    return(
     <nav className="navbar navbar-expand-lg navbar-dar bg-dark" style={{color: 'white'}}>
         <div className="container">
             <Link to="/" className="navbar-brand" style={{color: 'white'}}>
@@ -16,10 +20,10 @@ const Header = ({userState}) => (
                             className="nav-link"
                             activeClassName="active"
                             style={{color: 'white'}}
-                        >HeroGrid</NavLink>
+                        >HeroGrid-{firebase.getCurrentUsername()}</NavLink>
                     </li>)
                     :
-                    (<p></p>)
+                    (<p>firebase.getCurrentUsername()</p>)
                 }
                 
                 <li className="nav-item">
@@ -42,6 +46,10 @@ const Header = ({userState}) => (
             </ul>
         </div>
     </nav>
-)
+    )
+            
+}
+
+            
 
 export default Header;
