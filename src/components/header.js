@@ -1,27 +1,27 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import {Image} from "semantic-ui-react"
 
-const Header = () => (
-   
-    <nav className="navbar navbar-expand-lg navbar-dar " style={{color: 'white'}}>
-         <Image src = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/MarvelLogo.svg/1200px-MarvelLogo.svg.png"
-        style={{with: 1000 , height: 50, alignSelf:"center"}}
-        resizeMode="contain"/>
+const Header = ({userState}) => (
+    <nav className="navbar navbar-expand-lg navbar-dar bg-dark" style={{color: 'white'}}>
         <div className="container">
             <Link to="/" className="navbar-brand" style={{color: 'white'}}>
                 Marvel Heroes
             </Link>
 
             <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                    <NavLink
-                        to="/herogrid"
-                        className="nav-link"
-                        activeClassName="active"
-                        style={{color: 'white'}}
-                    >Herogrid</NavLink>
-                </li>
+                {userState ? 
+                    (<li className="nav-item">
+                        <NavLink
+                            to="/herogrid"
+                            className="nav-link"
+                            activeClassName="active"
+                            style={{color: 'white'}}
+                        >HeroGrid</NavLink>
+                    </li>)
+                    :
+                    (<p></p>)
+                }
+                
                 <li className="nav-item">
                     <NavLink
                         to="/login"
@@ -29,6 +29,15 @@ const Header = () => (
                         activeClassName="active"
                         style={{color: 'white'}}
                     >Login</NavLink>
+                </li>
+
+                <li className="nav-item">
+                    <NavLink
+                        to="/signup"
+                        className="nav-link"
+                        activeClassName="active"
+                        style={{color: 'white'}}
+                    >Signup</NavLink>
                 </li>
             </ul>
         </div>
