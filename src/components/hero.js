@@ -9,9 +9,7 @@ function Hero(props) {
     const handleModal = () => {
         setShow(!show);
         console.log(show);
-    }
-
-        
+    } 
         return(
             <div key={props.id} style={{display:'inline-block'}}>
                 
@@ -21,7 +19,7 @@ function Hero(props) {
 
                 </button>
 
-                <Modal open={show} size="large">
+                <Modal open={show} size="lg" centered>
                     <Modal.Header>hola{props.name}</Modal.Header>
                     <Modal.Content image >
                     <Image src={props.thumbnail} />
@@ -31,10 +29,7 @@ function Hero(props) {
                         holangas
                       </Modal.Description>
                         <Button variant="secondary" onClick={handleModal}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={handleModal}>
-                            Save Changes
+                            Cerrar
                         </Button>
                     </Modal.Content>
                 </Modal>

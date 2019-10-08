@@ -1,42 +1,38 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import {Image} from "semantic-ui-react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
+const Header = () => (
+   
+    <nav className="navbar navbar-expand-lg navbar-dar " style={{color: 'white'}}>
+         <Image src = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/MarvelLogo.svg/1200px-MarvelLogo.svg.png"
+        style={{with: 1000 , height: 50, alignSelf:"center"}}
+        resizeMode="contain"/>
+        <div className="container">
+            <Link to="/" className="navbar-brand" style={{color: 'white'}}>
+                Marvel Heroes
+            </Link>
+
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                    <NavLink
+                        to="/herogrid"
+                        className="nav-link"
+                        activeClassName="active"
+                        style={{color: 'white'}}
+                    >Herogrid</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink
+                        to="/login"
+                        className="nav-link"
+                        activeClassName="active"
+                        style={{color: 'white'}}
+                    >Login</NavLink>
+                </li>
+            </ul>
+        </div>
+    </nav>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;
