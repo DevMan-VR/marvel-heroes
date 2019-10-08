@@ -20,13 +20,12 @@ function Hero(props) {
                 </button>
 
                 <Modal open={show} size="lg" centered>
-                    <Modal.Header>hola{props.name}</Modal.Header>
+                    <Modal.Header>Hola {props.name}</Modal.Header>
                     <Modal.Content image >
                     <Image src={props.thumbnail} />
                       <Modal.Description>
                         <Header>{props.name}</Header>
                         {props.description}
-                        holangas
                       </Modal.Description>
                         <Button variant="secondary" onClick={handleModal}>
                             Cerrar
