@@ -2,7 +2,7 @@ import React from "react";
 import './login.css';
 import Fire from './config/Fire';
 
-function Login () {
+function Signup () {
     return(
         <div class="wrapper fadeInDown">
             <div id="formContent">
@@ -12,9 +12,10 @@ function Login () {
                 <div class="fadeIn first">
                 </div>
                 <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login"/>
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"/>
-                <input type="submit" class="fadeIn fourth" value="Log In"/>
+                <input type="text" id="username" className="fadeIn second" name="username" placeholder="username"/>
+                <input type="text" id="email" class="fadeIn second" name="email" placeholder="email"/>
+                <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
+                <input type="submit" class="fadeIn fourth" value="Sign Up"/>
                 </form>
 
                 
@@ -27,4 +28,4 @@ function Login () {
     )
 }
 
-export default Login;
+export default Signup;

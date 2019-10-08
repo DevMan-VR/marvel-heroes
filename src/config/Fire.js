@@ -13,4 +13,4 @@ import firebase from 'firebase';
 
   //iniciando firebase
   const fire = firebase.initializeApp(config);
-  export default Fire;
+  export default fire;
