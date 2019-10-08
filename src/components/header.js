@@ -20,7 +20,7 @@ function Header({userState}) {
                             className="nav-link"
                             activeClassName="active"
                             style={{color: 'white'}}
-                        >HeroGrid-{firebase.getCurrentUsername()}</NavLink>
+                        >HeroGrid</NavLink>
                     </li>)
                     :
                     (<p>firebase.getCurrentUsername()</p>)
