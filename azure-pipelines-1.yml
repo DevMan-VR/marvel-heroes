@@ -1,0 +1,41 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+
+
+name: $(Version).$(rev:r)
+
+variables:
+- group: Common Netlify
+
+trigger:
+- master
+
+stages:
+# Build Pipeline
+- stage: Build
+  jobs:
+  - job: HostedVs2017
+    displayName: Hosted VS2017
+    pool:
+      name: Hosted VS2017
+      demands: npm
+    workspace:
+      clean: all
+
+    steps:
+    - task: Npm@1
+      displayName: 'Install npm Packages'
+      inputs:
+        command: install
+        workingDir: '$(Build.SourcesDirectory)/$(ExtensionName)/src'
+        verbose: false
+
+    - task: PowerShell@2
+      displayName: 'Compile TypeScript Files'
+      inputs:
+        targetType: filePath
+        filePath: '$(Build.SourcesDirectory)/scripts/Compile-TypeScripts.ps1'
+        arguments: '-SourceDirectory $(Build.SourcesDirectory)/$(ExtensionName)/src'
