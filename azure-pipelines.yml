@@ -18,4 +18,6 @@ steps:
 - script: |
     npm install
     npm run build
+    git pull https://$(username):$(sec)@github.com/marvel-heroes.git master
+
   displayName: 'npm install and build'
