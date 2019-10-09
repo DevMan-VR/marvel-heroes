@@ -1,0 +1,34 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: ArchiveFiles@2
+  displayName: Zip Site
+  inputs:
+    #rootFolderOrFile: '$(Agent.BuildDirectory)/s/output' 
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.BuildId).zip' 
+    replaceExistingArchive: true
+
+- script:  >-
+      curl
+      -H 'Authorization: Bearer $(netlifyAccessToken)' 
+      -H 'Content-Type: application/zip'
+      --data-binary '@$(Build.BuildId).zip'
+      https://api.netlify.com/api/v1/sites/$(netlifySiteId)/deploys
+  workingDirectory: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Upload to Netlify'

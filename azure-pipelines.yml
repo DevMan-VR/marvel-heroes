@@ -16,6 +16,16 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+<<<<<<< HEAD
     git pull https://$(username):$(sec)@github.com/DevMan-VR/marvel-heroes.git master
 
   displayName: 'npm install and build'
+=======
+    git config --global user.email "manuelmartinezf.dev@gmail.com"
+    git config --global user.name "DevMan-VR"
+
+    git add .
+    git commit -m "from azure to git"
+    git push https://github.com/DevMan-VR/marvel-heroes.git master
+  displayName: 'pushing to'
+>>>>>>> 700fd9cc04ed6c58475b304abfd00f1384844dc1
