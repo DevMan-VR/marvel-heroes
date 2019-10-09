@@ -18,10 +18,10 @@ steps:
 - task: ArchiveFiles@2
   displayName: Zip Site
   inputs:
-    rootFolderOrFile: '$(Agent.BuildDirectory)/s/output' 
+    #rootFolderOrFile: '$(Agent.BuildDirectory)/s/output' 
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    archiveFile: '$(Build.BuildId).zip' 
     replaceExistingArchive: true
 
 - script:  >-
